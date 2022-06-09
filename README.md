@@ -1,4 +1,4 @@
-# Salient Feature Extraction using SIFT, RANSAC and BoW image classification
+# Salient Feature Extraction for Image Classification
  
 **General:**
 <br>
