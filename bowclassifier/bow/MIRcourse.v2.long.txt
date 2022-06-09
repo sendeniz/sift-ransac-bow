@@ -1,0 +1,72 @@
+How to use the bow program (bag of words):
+To run the bowimagetrieval on linux (rm. 303):
+
+(1)enter into Debug directory under bowimagetrieval 
+(2)enter the command:
+   make clean
+(3)enter the command:
+   make
+(4)enter the command, we can choose different query image in queryimages:
+   ./bowimageretrieval ../data/queryimages/image_0034.jpg ranklist.html
+
+check the retrieval result ranklist.html in the Debug folder
+for the bowimagesretrieval, if you want to change the dictionary size:
+find the size define of the dictionary size in the top of the maintest.cpp
+#define  DictionarySize 50 
+/*note that: if we already obtained the SIFT local features, Dictionary and Bowfeatures, just run the following codes in the main function:*/
+	cv::Mat Dictionary;
+	Load_Dictionary(Dictionary);
+	cout<<"Dictionary Loaded"<<endl;
+	Query_Test(argv[1],argv[2],BOWdataset_path,Dictionary);
+/*note that: if we already compiled and just changed the main function, using the following command:*/
+(1) make bowimageretrieval
+(2)enter the command, we can choose different query image in queryimages:
+   ./bowimagetrieval ../data/queryimages/image_0034.jpg ranklist.html
+
+
+To run the bowclassification on linux:
+(1)enter into the Debug directory under bowclassification 
+(2)enter the command:
+   make clean
+(3)enter the command:
+   make
+(4)enter the command, we can choose different query image in queryimages:
+   ./bowclassification ../data/queryimages/image_0032.jpg
+
+it will output the result: which category the query image belongs to.
+for the bowclassification, if you want to change the dictionary size:
+find the size define of the dictionary size in the top of the maintest.cpp
+#define  DictionarySize 50 
+/*note that: if we already obtained the SIFT local features, Dictionary, Bowfeatures and SVM, just run the following codes in the main function:*/
+
+	//GetFolderList
+        DIR * dir;
+        struct dirent * ptr;
+        char pathbuf[500];
+        strcpy(pathbuf, Timagefilepath.c_str());
+        dir = opendir(pathbuf);
+        
+        while((ptr = readdir(dir)) != NULL)
+        {
+	   if(!strstr(ptr->d_name, "."))
+	   {
+		   categories.push_back(ptr->d_name);
+		   cout<< ptr->d_name <<endl;
+	   }
+        }
+        closedir(dir);
+
+        cv::Mat Dictionary;
+	
+	Load_Dictionary(Dictionary);
+	
+	CvSVM svm;
+        
+	svm.load(svmclassifier_path.c_str());
+	int ID=Query_Predict(argv[1],svm,Dictionary);
+	cout<<categories[ID].c_str()<<endl;
+/*note that: if we already complied and just changed the main function, using the following command:*/
+(1) make bowclassification
+(2)enter the command, we can choose different query image in queryimages:
+   ./bowclassification ../data/queryimages/image_0032.jpg
+

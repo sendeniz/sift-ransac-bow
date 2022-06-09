@@ -1,0 +1,28 @@
+How to use the bow program (bag of words):
+
+To run the bowimagetrieval on linux (rm. 303): 
+
+(1)enter the Debug directory under bowimagetrieval 
+(2)enter the command:
+   make clean
+(3)enter the command:
+   make
+(4)enter the command below - we can choose different query image in queryimages:
+
+   ./bowimageretrieval ../data/queryimages/image_0034.jpg ranklist.html
+
+check the retrieval result ranklist.html in the Debug folder
+
+
+run the bowclassification on linux:
+
+(1)enter into the Debug directory under bowclassification 
+(2)enter the command:
+   make clean
+(3)enter the command:
+   make
+(4)enter the command, we can choose different query image in queryimages:
+   ./bowclassification ../data/queryimages/image_0032.jpg
+
+it will output the result: which category the query image belongs to.
+
